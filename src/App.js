@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { auth } from "./Firebase/utils";
 
 import "./App.css";
 
@@ -8,17 +9,40 @@ import Shop from "./pages/Shop/Shop";
 import SignInAndSignUp from "./pages/SignInAndSignUp/SignInAndSignUp";
 import Header from "./components/Header/Header";
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/signin" component={SignInAndSignUp} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null
+    };
+  }
+
+  unSubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      console.log("user", user);
+      this.setState({ currentUser: user });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/signin" component={SignInAndSignUp} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
