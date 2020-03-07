@@ -14,3 +14,14 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+// Google authentication utility
+const provider = new firebase.auth.GoogleAuthProvider();
+// Always trigger google popup whenever we use GoogleAuthProvider - Authentication/ Signin
+provider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;
