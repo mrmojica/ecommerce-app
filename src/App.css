@@ -7,3 +7,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+* {
+  /* Prevent margin and padding from effecting element size */
+  box-sizing: border-box;
+}
