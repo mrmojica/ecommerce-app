@@ -22,6 +22,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   // Use firebase query reference to get snapShot data
   // to see if user exist. Create user if.
+  // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
 

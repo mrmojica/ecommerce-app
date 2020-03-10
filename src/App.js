@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./Firebase/utils";
+import { auth, createUserProfileDocument } from "./Firebase/utils";
 
 import "./App.css";
 
@@ -21,9 +21,24 @@ class App extends React.Component {
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      console.log("user", user);
-      this.setState({ currentUser: user });
+    // store user data in state
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        // onSnapshot() will give us an object of related user data.
+        // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#onsnapshot
+        userRef.onSnapshot(snapshot => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data()
+            }
+          });
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
