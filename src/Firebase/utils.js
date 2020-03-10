@@ -13,6 +13,33 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
+// firebase.User reference
+// https://firebase.google.com/docs/reference/js/firebase.User
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) {
+    return;
+  }
+
+  // Use firebase query reference to get snapShot data
+  // to see if user exist. Create user if.
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exist) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      // Create new user.
+      await userRef.set({ displayName, email, createdAt, ...additionalData });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+
+  return userRef;
+};
+
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
