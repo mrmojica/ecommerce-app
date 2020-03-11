@@ -1,6 +1,6 @@
 import React from "react";
-import FormInput from "../FormInput/FormInput";
-import CustomButton from "../CustomButton/CustomButton";
+import FormInput from "../../../components/FormInput/FormInput";
+import CustomButton from "../../../components/CustomButton/CustomButton";
 import { auth, createUserProfileDocument } from "../../Firebase/utils";
 
 import "./styles.scss";
