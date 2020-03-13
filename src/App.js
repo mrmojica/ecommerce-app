@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./Firebase/utils";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/userActions";
 
 import "./App.css";
 
@@ -13,7 +15,8 @@ class App extends React.Component {
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    // store user data in state
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -21,16 +24,14 @@ class App extends React.Component {
         // onSnapshot() will give us an object of related user data.
         // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#onsnapshot
         userRef.onSnapshot(snapshot => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data()
-            }
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
           });
         });
       }
 
-      this.setState({ currentUser: userAuth });
+      setCurrentUser(userAuth);
     });
   }
 
@@ -52,4 +53,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
