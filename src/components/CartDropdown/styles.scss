@@ -15,8 +15,8 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    // TODO: fix scrolling when multiple cart items in cart.
-    // overflow: scroll;
+    // Add scroll when list items get larger. Overflow doesn't take up space.
+    overflow: overlay;
   }
 
   button {
