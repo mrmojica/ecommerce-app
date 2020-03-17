@@ -4,6 +4,7 @@ import { auth, createUserProfileDocument } from "./Firebase/utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/userActions";
 import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/userSelector";
 
 import "./App.css";
 
@@ -11,7 +12,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import Shop from "./pages/Shop/Shop";
 import SignInAndSignUp from "./pages/SignInAndSignUp/SignInAndSignUp";
 import Header from "./components/Header/Header";
-import { selectCurrentUser } from "./redux/user/userSelector";
+import CheckoutPage from "./pages/Checkout/Checkout";
 
 class App extends React.Component {
   unSubscribeFromAuth = null;
@@ -48,6 +49,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={Shop} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
