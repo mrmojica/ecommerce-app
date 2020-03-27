@@ -12,11 +12,10 @@ const StripeCheckoutButton = ({ price }) => {
   };
 
   return (
-    // TODO: update stripe info.
     // https://github.com/azmenak/react-stripe-checkout
     <StripeCheckout
       label="Pay Now"
-      name="Clothing Ltd."
+      name="Crown Ltd."
       billingAddress
       shippingAddress
       image="https://sendeyo.com/up/d/f3eb2117da"
