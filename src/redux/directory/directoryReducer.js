@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     },
     {
       title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+      imageUrl:
+        "https://i.ibb.co/PjmxCzr/isaac-ramirez-UNSj7-Bt-OK0-Q-unsplash.jpg",
       id: 2,
       linkUrl: "shop/jackets"
     },
@@ -20,7 +21,8 @@ const INITIAL_STATE = {
     },
     {
       title: "womens",
-      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+      imageUrl:
+        "https://i.ibb.co/gv0g3q2/ian-dooley-TT-ROx-Wj9n-A-unsplash.jpg",
       size: "large",
       id: 4,
       linkUrl: "shop/womens"
