@@ -41,6 +41,26 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// Add shop data to Firebase
+// Note: call once in App.js componentDidMount so we do not
+// have to manually enter all the data into Firebase.
+// https://firebase.google.com/docs/firestore/manage-data/transactions
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = firestore.collection(collectionKey);
+
+//   const batch = firestore.batch();
+//   objectsToAdd.forEach((obj) => {
+//     // get a new document ref and generate a new id
+//     const newDocRef = collectionRef.doc();
+//     batch.set(newDocRef, obj);
+//   });
+
+//   return await batch.commit();
+// };
+
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
