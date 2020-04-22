@@ -4,6 +4,7 @@ import CustomButton from "../../../components/CustomButton/CustomButton";
 import { auth, createUserProfileDocument } from "../../../Firebase/utils";
 import { SignUpContainer, SignUpTitle } from "./SignUpStyles";
 
+// TODO: Fix tags and add input error feedback.
 const SignUp = () => {
   const [userCredentials, setCredentials] = useState({
     displayName: "",

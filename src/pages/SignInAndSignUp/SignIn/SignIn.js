@@ -8,6 +8,7 @@ import {
   ButtonsBarContainer
 } from "./SignInStyles";
 
+// TODO: Fix tags and add input error feedback.
 const SignIn = () => {
   const [useCredentials, setCredentials] = useState({
     email: "",
