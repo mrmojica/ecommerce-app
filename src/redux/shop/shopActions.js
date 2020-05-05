@@ -2,6 +2,7 @@ import ShopActionTypes from "./shopTypes";
 import { firestore } from "../../Firebase/utils";
 import { convertCollectionsSnapshotToMap } from "../../Firebase/utils";
 
+// TODO: rename functions to be plural
 export const fetchCollectionStart = (collectionsMap) => ({
   type: ShopActionTypes.FETCH_COLLECTIONS_START,
   payload: collectionsMap
