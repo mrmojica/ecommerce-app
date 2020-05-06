@@ -4,7 +4,10 @@ import {
   convertCollectionsSnapshotToMap
 } from "../../Firebase/utils";
 import ShopActionTypes from "./shopTypes";
-import { fetchCollectionSuccess, fetchCollectionFailure } from "./shopActions";
+import {
+  fetchCollectionsSuccess,
+  fetchCollectionsFailure
+} from "./shopActions";
 
 export function* fetchCollectionsAsync() {
   try {
@@ -14,9 +17,9 @@ export function* fetchCollectionsAsync() {
       convertCollectionsSnapshotToMap,
       snapshot
     );
-    yield put(fetchCollectionSuccess(collectionsMap));
+    yield put(fetchCollectionsSuccess(collectionsMap));
   } catch (error) {
-    yield put(fetchCollectionFailure(error.message));
+    yield put(fetchCollectionsFailure(error.message));
   }
 }
 
