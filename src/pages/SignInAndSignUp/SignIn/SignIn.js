@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import FormInput from "../../../components/FormInput/FormInput";
 import CustomButton from "../../../components/CustomButton/CustomButton";
-import { signInWithGoogle, auth } from "../../../Firebase/utils";
+import { auth } from "../../../Firebase/utils";
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer
 } from "./SignInStyles";
+import { googleSignInStart } from "../../../redux/user/userActions";
 
 // TODO: Fix tags and add input error feedback.
-const SignIn = () => {
+const SignIn = ({ googleSignInStart }) => {
   const [useCredentials, setCredentials] = useState({
     email: "",
     setCredentials: ""
@@ -57,7 +59,12 @@ const SignIn = () => {
         />
         <ButtonsBarContainer>
           <CustomButton type="submit">SIGN IN</CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+          {/* Set type to 'button' to overide submit type */}
+          <CustomButton
+            type="button"
+            onClick={googleSignInStart}
+            isGoogleSignIn
+          >
             SIGN IN WITH GOOGLE
           </CustomButton>
         </ButtonsBarContainer>
@@ -66,4 +73,8 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart())
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
