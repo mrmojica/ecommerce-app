@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./Firebase/utils";
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/userActions";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/userSelector";
 
@@ -18,12 +16,9 @@ class App extends React.Component {
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
-
     //     // onSnapshot() will give us an object of related user data.
     //     // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#onsnapshot
     //     userRef.onSnapshot(snapshot => {
@@ -33,7 +28,6 @@ class App extends React.Component {
     //       });
     //     });
     //   }
-
     //   setCurrentUser(userAuth);
     // });
   }
@@ -67,8 +61,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

@@ -2,31 +2,28 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import FormInput from "../../../components/FormInput/FormInput";
 import CustomButton from "../../../components/CustomButton/CustomButton";
-import { auth } from "../../../Firebase/utils";
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer
 } from "./SignInStyles";
-import { googleSignInStart } from "../../../redux/user/userActions";
+import {
+  googleSignInStart,
+  emailSignInStart
+} from "../../../redux/user/userActions";
 
 // TODO: Fix tags and add input error feedback.
-const SignIn = ({ googleSignInStart }) => {
+const SignIn = ({ googleSignInStart, emailSignInStart }) => {
   const [useCredentials, setCredentials] = useState({
     email: "",
-    setCredentials: ""
+    password: ""
   });
 
-  const { email, password } = useCredentials;
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const { email, password } = useCredentials;
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setCredentials(useCredentials);
-    } catch (error) {
-      console.log(error);
-    }
+    emailSignInStart(email, password);
   };
 
   const handleChange = (event) => {
@@ -74,7 +71,9 @@ const SignIn = ({ googleSignInStart }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  googleSignInStart: () => dispatch(googleSignInStart())
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password }))
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);
