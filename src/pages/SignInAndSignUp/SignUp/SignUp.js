@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import FormInput from "../../../components/FormInput/FormInput";
 import CustomButton from "../../../components/CustomButton/CustomButton";
-import { auth, createUserProfileDocument } from "../../../Firebase/utils";
 import { SignUpContainer, SignUpTitle } from "./SignUpStyles";
+import { signUpStart } from "../../../redux/user/userActions";
+import { connect } from "react-redux";
 
 // TODO: Fix tags and add input error feedback.
-const SignUp = () => {
+const SignUp = ({ signUpStart }) => {
   const [userCredentials, setCredentials] = useState({
     displayName: "",
     email: "",
@@ -23,23 +24,7 @@ const SignUp = () => {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserProfileDocument(user, { displayName });
-
-      setCredentials({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    signUpStart({ displayName, email, password });
   };
 
   const handleChange = (event) => {
@@ -91,4 +76,8 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
