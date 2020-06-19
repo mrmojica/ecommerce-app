@@ -5,7 +5,7 @@ import { selectCollection } from "../../redux/shop/shopSelectors";
 import {
   CollectionPageContainer,
   CollectionTitle,
-  CollectionItemsContainer,
+  CollectionItemsContainer
 } from "./CollectionStyles";
 
 const Collection = ({ collection }) => {
@@ -24,7 +24,7 @@ const Collection = ({ collection }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.match.params.collectionId)(state),
+  collection: selectCollection(ownProps.match.params.collectionId)(state)
 });
 
 export default connect(mapStateToProps)(Collection);
