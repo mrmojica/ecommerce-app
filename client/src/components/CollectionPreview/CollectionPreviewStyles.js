@@ -26,6 +26,7 @@ export const PreviewContainer = styled.div`
   @media screen and (max-width: 800px) {
     display: grid;
     /* Take 2 columns full spacing (1fr) of view. */
+    /* TODO: Chrome is incorrectly setting this to 1fr 1fr 1fr 1fr. */
     grid-template-columns: 1fr 1fr;
     /* Space between items */
     grid-gap: 15px;

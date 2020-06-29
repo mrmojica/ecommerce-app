@@ -20,14 +20,17 @@ export const CollectionItemContainer = styled.div`
 
   @media screen and (max-width: 800px) {
     /* Take 40% of full window view. */
-    width: 40vw;
+    /* TODO: uncomment once grid-template-columns: 1fr 1fr;
+    issue is resolved from CollectionPreviewStyles.js */
+    /* width: 40vw; */
 
     &:hover {
-    .image {
-      opacity: unset;
-    }
-    button {
-      opacity: unset;
+      .image {
+        opacity: unset;
+      }
+      button {
+        opacity: unset;
+      }
     }
   }
 `;
