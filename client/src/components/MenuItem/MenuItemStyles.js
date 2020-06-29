@@ -27,6 +27,12 @@ export const MenuItemContainer = styled.div`
   &:last-child {
     margin-left: 7.5px;
   }
+
+  /* The media query will overwrite the previous styles. This will allow 
+  the menu items to fit better in 'mobile' view by ignoring the size property. */
+  @media screen and (max-width: 800px) {
+    height: 200px;
+  }
 `;
 
 export const BackgroundImageContainer = styled.div`
