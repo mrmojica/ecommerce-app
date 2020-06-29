@@ -3,7 +3,7 @@ import CollectionItem from "../CollectionItem/CollectionItem";
 import {
   CollectionPreviewContainer,
   TitleContainer,
-  PreviewContainer,
+  PreviewContainer
 } from "./CollectionPreviewStyles";
 
 const CollectionPreview = ({ title, items }) => (
