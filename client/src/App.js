@@ -6,6 +6,7 @@ import { selectCurrentUser } from "./redux/user/userSelector";
 import { GlobalStyles } from "./globalStyles";
 import { checkUserSession } from "./redux/user/userActions";
 import Header from "./components/Header/Header";
+import Spinner from "./components/Spinner/Spinner";
 
 // Imrpove performance using React Lazy loading.
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
@@ -25,7 +26,7 @@ const App = ({ checkUserSession, currentUser }) => {
       <GlobalStyles />
       <Header />
       <Switch>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={Spinner}>
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={Shop} />
           <Route exact path="/checkout" component={CheckoutPage} />
