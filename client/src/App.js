@@ -7,6 +7,7 @@ import { GlobalStyles } from "./globalStyles";
 import { checkUserSession } from "./redux/user/userActions";
 import Header from "./components/Header/Header";
 import Spinner from "./components/Spinner/Spinner";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 // Imrpove performance using React Lazy loading.
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
@@ -26,18 +27,20 @@ const App = ({ checkUserSession, currentUser }) => {
       <GlobalStyles />
       <Header />
       <Switch>
-        <Suspense fallback={Spinner}>
-          <Route exact path="/" component={Homepage} />
-          <Route path="/shop" component={Shop} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-            }
-          />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path="/" component={Homepage} />
+            <Route path="/shop" component={Shop} />
+            <Route exact path="/checkout" component={CheckoutPage} />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+              }
+            />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </>
   );
