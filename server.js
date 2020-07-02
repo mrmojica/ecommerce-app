@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Heroku does not offer Gzipping compression so
-// we added the compression library.
+// we added the compression library
 app.use(compression);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
