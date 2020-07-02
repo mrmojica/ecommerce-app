@@ -1,5 +1,5 @@
 {
-  "name": "crown-ltd-server",
+  "name": "crown-server",
   "version": "1.0.0",
   "engines": {
     "node": "v12.14.1",
